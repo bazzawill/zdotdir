@@ -1,0 +1,2 @@
+setopt INTERACTIVE_COMMENTS
+
