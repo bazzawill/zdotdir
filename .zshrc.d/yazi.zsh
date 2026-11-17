@@ -7,11 +7,11 @@ function y() {
 }
 
 yazi_pick_path() {
-  local file=$(yazi --chooser-file=>(cat))
+  local -a files=("${(@f)$(yazi --chooser-file=>(cat))}")
 
-  [[ -z "$file" ]] && zle redisplay && return
+  (( ${#files} == 0 )) || [[ -z "${files[1]}" ]] && zle redisplay && return
 
-  LBUFFER+="\"$file\""
+  LBUFFER+="${(j: :)${(@qqq)files}}"
   zle redisplay
 }
 
